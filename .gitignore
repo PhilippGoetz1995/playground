@@ -1,0 +1,7 @@
+#BACKEND | Django
+/backend/venv
+/backend/media
+
+
+#FRONTEND | React
+/frontend/node_modules
