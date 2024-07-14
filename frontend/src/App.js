@@ -9,7 +9,7 @@ import Logout from "./pages/Logout";
 
 import { baseUrl } from "./shared";
 
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Login State Handling which is on overall App Level

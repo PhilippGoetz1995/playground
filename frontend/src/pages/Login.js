@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { baseUrl } from "../shared";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
 
 import { Form, Button } from "react-bootstrap";
@@ -11,7 +11,7 @@ export default function Login() {
 
   //const [loggedIn, login] = useContext(LoginContext);
 
-  const { loggedIn, login } = useContext(LoginContext);
+  const { login } = useContext(LoginContext);
 
   //const loggedInState = useContext(LoginContext);
 

@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function NewsCard({ id, title, description, image }) {
   const imageURL = "http://127.0.0.1:8000/" + image;

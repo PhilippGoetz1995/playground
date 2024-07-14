@@ -1,15 +1,15 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { baseUrl } from "../shared";
-import { useLocation, useNavigate } from "react-router-dom";
+//import { useLocation, useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
 
-import { Form, Button } from "react-bootstrap";
+//import { Form, Button } from "react-bootstrap";
 
 export default function Logout() {
-  const navigate = useNavigate();
-  const [logedIn, setLoggedIn] = useState();
+  //const navigate = useNavigate();
+  //const [logedIn, setLoggedIn] = useState();
 
-  const { loggedIn, login, logout } = useContext(LoginContext);
+  const { logout } = useContext(LoginContext);
 
   useEffect(() => {
     const url = baseUrl + "api/logout/";
@@ -30,7 +30,7 @@ export default function Logout() {
 
         console.log(response);
 
-        if (response.status != 200) {
+        if (response.status !== 200) {
           console.log(response.status);
 
           throw new Error("Network response was not ok");
@@ -47,7 +47,7 @@ export default function Logout() {
     };
 
     logoutUser();
-  }, []);
+  });
 
   return (
     <>

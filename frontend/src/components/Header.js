@@ -1,15 +1,15 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import { useContext } from "react";
 import { LoginContext } from "../App";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function Header() {
-  const { loggedIn, login } = useContext(LoginContext);
+  const { loggedIn } = useContext(LoginContext);
 
   return (
     <Navbar expand="lg" className="bg-secondary">
       <Container>
         <Navbar.Brand shref="#home" className="text-white">
-          PG Playground
+          PG Playground v0.1.11
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

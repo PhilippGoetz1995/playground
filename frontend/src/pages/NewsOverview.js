@@ -1,10 +1,8 @@
 import { baseUrl } from "../shared";
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 
 import NewsCard from "../components/NewsCard";
-
-import { Button } from "react-bootstrap";
 
 export default function NewsOverview() {
   const [error, setError] = useState();
@@ -40,8 +38,9 @@ export default function NewsOverview() {
       })
       .catch((e) => {
         setError(e.message);
+        console.log(error);
       });
-  }, []);
+  });
 
   return (
     <>

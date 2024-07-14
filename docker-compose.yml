@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      # With the context all paths need below will start from the directory where the compose file is in
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount local src folder with container src folder
+      - ./frontend/src:/app/src
+    networks:
+      - webnet
+    environment:
+      # This is needed so that mounted volume for react application is working
+      - WATCHPACK_POLLING=true
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    #volumes:
+    #  - static_volume:/app/static
+    networks:
+      - webnet
+
+  nginx:
+    build: ./webserver
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - webnet
+
+# With that network the following call is possible from nginx configuration http://frontend:3000;
+networks:
+  webnet:
