@@ -20,8 +20,7 @@ jobs:
           USER_NAME: ${{secrets.USERNAME}}
 
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          echo "$PRIVATE_KEY" > github-connect.pem
+          chmod 600 github-connect.pem
 
-              # Now we have got the access of EC2 and we will start the deploy .
-              mkdir hello 8
+          mkdir new9
