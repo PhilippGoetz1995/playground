@@ -34,9 +34,9 @@ jobs:
             sudo docker-compose -f docker-compose-prod.yml down
             
             # Pull the latest state from git hub
-            #git pull --force
+            git pull --force
 
             # Start the containers
-            #docker-compose -f docker-compose-prod.yml up
+            docker-compose -f docker-compose-prod.yml up
             
           '
