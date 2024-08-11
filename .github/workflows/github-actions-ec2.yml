@@ -26,12 +26,12 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196 '
             
             sudo -i
-
-            # Stop all running containers
-            docker system prune -a --volumes -f
             
             # Change into the correct folder
-            #cd test1/playground
+            cd test1/playground
+
+            # Stop the running proccess
+            docker-compose -f docker-compose-prod.yml down
             
             # Pull the latest state from git hub
             #git pull --force
