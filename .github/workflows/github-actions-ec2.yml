@@ -23,4 +23,7 @@ jobs:
           echo "$PRIVATE_KEY" > github-connect.pem
           chmod 600 github-connect.pem
 
+          ssh -i github-connect.pem ec2-user@3.76.35.196
+
+
           mkdir new9
