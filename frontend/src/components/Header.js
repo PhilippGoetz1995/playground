@@ -9,7 +9,7 @@ export default function Header() {
     <Navbar expand="lg" className="bg-secondary">
       <Container>
         <Navbar.Brand shref="#home" className="text-white">
-          PG Playground v0.1.17
+          PG Playground v0.1.18
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
