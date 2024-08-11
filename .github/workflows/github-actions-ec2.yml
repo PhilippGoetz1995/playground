@@ -24,6 +24,4 @@ jobs:
           chmod 600 github-connect.pem
 
           ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196
-
-
-          mkdir new9
+            mkdir new9
