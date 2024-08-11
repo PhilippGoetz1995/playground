@@ -24,9 +24,19 @@ jobs:
           chmod 600 github-connect.pem
 
           ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196 '
-            pwd
+            
+            sudo -i
+
+            # Stop all running containers
+            docker stop $(docker ps -q)
+            
+            # Change into the correct folder
             cd test1/playground
-            pwd
+            
+            # Pull the latest state from git hub
             git pull --force
+
+            # Start the containers
+            docker-compose -f docker-compose-prod.yml up
             
           '
