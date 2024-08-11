@@ -24,5 +24,7 @@ jobs:
           chmod 600 github-connect.pem
 
           ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196
-          sudo mkdir new15
-          echo "Hello, World!"
+
+          cd hello
+
+          git clone https://github.com/PhilippGoetz1995/playground.git
