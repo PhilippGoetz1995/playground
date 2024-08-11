@@ -1,0 +1,29 @@
+services: 
+
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "8000:8000"
+  #   #volumes:
+  #   #  - static_volume:/app/static
+  #   networks:
+  #     - webnet
+
+  webserver:
+    build:
+      # With the context all paths need below will start from the directory where the compose file is in
+      context: .
+      dockerfile: ./webserver/Dockerfile-prod
+    ports:
+      - "80:80"
+    # depends_on:
+    #   - frontend
+    #- backend
+    networks:
+      - webnet
+    environment:
+      - NODE_ENV=production
+
+# With that network the following call is possible from nginx configuration http://frontend:3000;
+networks:
+  webnet:
