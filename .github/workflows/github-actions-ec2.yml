@@ -28,7 +28,7 @@ jobs:
             sudo -i
 
             # Stop all running containers
-            docker system prune -a --volumes
+            docker system prune -a --volumes -f
             
             # Change into the correct folder
             #cd test1/playground
