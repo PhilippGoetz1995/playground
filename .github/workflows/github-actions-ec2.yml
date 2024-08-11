@@ -25,6 +25,7 @@ jobs:
 
           ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196 '
             pwd
-            cd hello
-            git clone https://github.com/PhilippGoetz1995/playground.git
+            mkdir test1
+            git pull --force
+            
           '
