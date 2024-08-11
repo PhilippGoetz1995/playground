@@ -23,8 +23,9 @@ jobs:
           echo "$PRIVATE_KEY" > github-connect.pem
           chmod 600 github-connect.pem
 
-          ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196
+          ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196 '
             pwd
+          '
 
           pwd
           cd hello
