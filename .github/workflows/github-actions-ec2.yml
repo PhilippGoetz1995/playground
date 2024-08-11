@@ -34,7 +34,7 @@ jobs:
             # Pull the latest state from git hub
             git pull --force
 
-            # Start the containers
-            sudo docker-compose -f docker-compose-prod.yml up --build
+            # Start the containers in background "-d"
+            sudo docker-compose -f docker-compose-prod.yml up --build -d
             
           '
