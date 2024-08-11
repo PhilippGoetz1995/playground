@@ -25,3 +25,4 @@ jobs:
 
           ssh -o StrictHostKeyChecking=no -i github-connect.pem ec2-user@3.76.35.196
           mkdir new15
+          echo "Hello, World!"
