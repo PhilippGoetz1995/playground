@@ -31,12 +31,12 @@ jobs:
             docker stop $(docker ps -q)
             
             # Change into the correct folder
-            cd test1/playground
+            #cd test1/playground
             
             # Pull the latest state from git hub
-            git pull --force
+            #git pull --force
 
             # Start the containers
-            docker-compose -f docker-compose-prod.yml up
+            #docker-compose -f docker-compose-prod.yml up
             
           '
