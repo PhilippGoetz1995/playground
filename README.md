@@ -10,6 +10,9 @@ P-Goetz Playground Application
 Start the STAGE Containers
 docker-compose -f docker-compose-stage.yml up
 
+Start the PROD Containers
+docker-compose -f docker-compose-prod.yml up
+
 ```bash
 pip install foobar
 ```
