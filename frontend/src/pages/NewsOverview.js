@@ -40,7 +40,7 @@ export default function NewsOverview() {
         setError(e.message);
         console.log(error);
       });
-  }, []); // Empty array ensures this only runs once
+  }, [error, url]); // Empty array ensures this only runs once => i add here now "error" and "url" to fix the eslint warning
 
   return (
     <>
