@@ -22,6 +22,9 @@ services:
       dockerfile: ./backend/Dockerfile-stage
     ports:
       - "8000:8000"
+    volumes:
+      # Mount local src folder with container src folder
+      - ./backend:/app
     #TODO => Static File implementation for Images etc.
     #volumes:
     #  - static_volume:/app/static

@@ -15,7 +15,7 @@ export default function NewsOverview() {
 
   const url = baseUrl + "api/newslist/";
 
-  //Initial Load of the Webpage
+  // //Initial Load of the Webpage
   useEffect(() => {
     fetch(url, {
       headers: {
@@ -40,7 +40,7 @@ export default function NewsOverview() {
         setError(e.message);
         console.log(error);
       });
-  });
+  }, []); // Empty array ensures this only runs once
 
   return (
     <>

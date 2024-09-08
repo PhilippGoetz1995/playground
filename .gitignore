@@ -1,8 +1,10 @@
-#BACKEND | Django
+##BACKEND | Django
 /backend/venv
 /backend/media
 
+/backend/*.sqlite3
 
-#FRONTEND | React
+
+##FRONTEND | React
 /frontend/node_modules
 /frontend/build
