@@ -4,9 +4,15 @@
 }
 
 /* Design for playground contentbox */
-
 .playgroundContentBox {
   background-color: white;
   min-height: 100px;
-  padding: 15px;
+  padding: 10px;
+}
+
+/* Code embed */
+.codesnip {
+  width: 100%;
+  overflow: auto;
+  border-radius: 10px;
 }
