@@ -6,6 +6,8 @@ import NewsOverview from "./pages/NewsOverview";
 import AddNewsArticle from "./pages/AddNewsArticle";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
+import TemplatePage from "./pages/TemplatePage";
+import Playground from "./pages/Playground";
 
 import { baseUrl } from "./shared";
 
@@ -74,6 +76,8 @@ function App() {
               <Route path="/addnewsarticle" element={<AddNewsArticle />} />
               <Route path="/login" element={<Login />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/playground" element={<Playground />} />
+              <Route path="/templatepage" element={<TemplatePage />} />
             </Routes>
           </BrowserRouter>
         </div>
