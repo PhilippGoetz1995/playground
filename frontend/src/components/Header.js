@@ -15,7 +15,7 @@ export default function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="/playground" className="text-white">
-              Playground
+              DEV Playground
             </Nav.Link>
             <Nav.Link href="/newsoverview" className="text-white">
               News Overview
