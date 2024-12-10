@@ -2,9 +2,10 @@ import Nav from "react-bootstrap/Nav";
 
 import { useEffect, useState } from "react";
 
-import PythonBasics from "../components/playground_components/PythonBasics";
-import ReactBasics from "../components/playground_components/ReactBasics";
-import DjangoBasics from "../components/playground_components/DjangoBasics";
+import Python from "./subpages/Python";
+import React from "./subpages/React";
+import Django from "./subpages/Django";
+import Bootstrap from "./subpages/Bootstrap";
 
 export default function Playground() {
   const [hash, setHash] = useState("");
@@ -33,14 +34,17 @@ export default function Playground() {
   let componentName = hash;
 
   switch (componentName) {
-    case "PythonBasics":
-      ComponentToRender = () => <PythonBasics />;
+    case "Python":
+      ComponentToRender = () => <Python />;
       break;
-    case "ReactBasics":
-      ComponentToRender = () => <ReactBasics />;
+    case "React":
+      ComponentToRender = () => <React />;
       break;
-    case "DjangoBasics":
-      ComponentToRender = () => <DjangoBasics />;
+    case "Django":
+      ComponentToRender = () => <Django />;
+      break;
+    case "Bootstrap":
+      ComponentToRender = () => <Bootstrap />;
       break;
     default:
       ComponentToRender = () => <div>Error on Page</div>;
@@ -52,16 +56,23 @@ export default function Playground() {
       {/* defaultActiveKey="#PythonBasics" */}
       <Nav variant="tabs" activeKey={activeKey}>
         <Nav.Item>
-          <Nav.Link href="#PythonBasics" eventKey="PythonBasics">
-            Python Basics
+          <Nav.Link href="#Python" eventKey="Python">
+            Python
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="#ReactBasics">React Basics</Nav.Link>
+          <Nav.Link href="#React" eventKey="React">
+            React
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="#DjangoBasics" eventKey="DjangoBasics">
-            Django Basics
+          <Nav.Link href="#Django" eventKey="Django">
+            Django
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="#Bootstrap" eventKey="Bootstrap">
+            Bootstrap
           </Nav.Link>
         </Nav.Item>
       </Nav>

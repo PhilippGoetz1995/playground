@@ -3,7 +3,7 @@ import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-export default function PythonBasic() {
+export default function Python() {
   const Code = `# Variables and String Manipulation
 name = "Alice"
 age = 30

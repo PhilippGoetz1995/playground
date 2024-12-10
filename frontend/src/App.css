@@ -16,3 +16,12 @@
   overflow: auto;
   border-radius: 10px;
 }
+
+/* Stylig for Bootstrap Demo page */
+.bootstrapExampleColumn {
+  background-color: #bdc3c7;
+  border: 1px solid #c0392b;
+  color: white;
+  text-align: center;
+  padding: 0px !important;
+}

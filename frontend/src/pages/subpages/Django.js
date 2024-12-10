@@ -1,9 +1,8 @@
 import { baseUrl } from "../../shared";
-import { Container, Row, Col, Table } from "react-bootstrap";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Table } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-export default function DjangoBasics() {
+export default function Django() {
   const [formData, setFormData] = useState({
     company: "",
     type: "",
@@ -112,7 +111,7 @@ export default function DjangoBasics() {
     <div className="playgroundContentBox">
       <Container>
         <Row className="justify-content-center">
-          <Col xs={12} md={12}>
+          <Col>
             <div className="content">
               <h2>REST API</h2>
               <p>Basic Example of using DJango Backend as an REST API</p>

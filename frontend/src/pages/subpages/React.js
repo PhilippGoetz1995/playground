@@ -3,9 +3,9 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 //Import also State from react
 import { useState } from "react";
 
-import ReactTestComponent from "./ReactTestComponent.js";
+import ReactTestComponent from "../../components/playground_components/ReactTestComponent.js";
 
-export default function ReactBasic() {
+export default function React() {
   let uhrzeit = new Date().getHours();
   let newUhrzeit;
 
