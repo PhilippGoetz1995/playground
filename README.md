@@ -13,6 +13,8 @@ docker-compose -f docker-compose-stage.yml up
 Start the PROD Containers
 docker-compose -f docker-compose-prod.yml up
 
+------ FROM HERE ON JUST PLACEHOLDER CONTENT => NEED TO BE UPDATED ---------
+
 ```bash
 pip install foobar
 ```

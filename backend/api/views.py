@@ -8,8 +8,15 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 
-from .models import NewsArticle
-from .serializers import NewsArticleSerializer
+# For running sql requests
+from django.db import connection
+
+# Logging option in python
+import logging
+logger = logging.getLogger(__name__)
+
+from .models import NewsArticle, simpleTestModelCars
+from .serializers import NewsArticleSerializer, CarSerializer
 
 @api_view(['GET'])
 def news_list_view(request):
@@ -32,6 +39,38 @@ def add_news_article_view(request):
             serializer.save()  # Save the valid data to the database
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+       
+# Playground add new car and get list of cars    
+    
+@api_view(['POST'])
+def add_new_car_view(request):
+    if request.method == 'POST':
+        serializer = CarSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()  # Save the valid data to the database
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET'])
+def car_list_view(request):
+    if request.method == 'GET':
+        # Get all objects from database and save it in queryset
+        queryset = simpleTestModelCars.objects.all()
+
+        #Serialier take queryset and transform it from a queryset into a python object that can be read => Data is in .data
+        serializedData = CarSerializer(queryset, many=True)
+
+        #Via JsonResponse the data can be exposed in JSON Format
+        return JsonResponse(serializedData.data, safe=False)
+
+ 
+
+@api_view(['DELETE'])
+def reset_car_list_view(request):
+    simpleTestModelCars.objects.all().delete()  # Deletes all records in the table
+    return Response({'message': 'All objects have been deleted.'}, status=status.HTTP_204_NO_CONTENT)
+
+
 
 @api_view(['POST'])
 def login_view(request):

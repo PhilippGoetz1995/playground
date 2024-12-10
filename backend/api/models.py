@@ -30,3 +30,8 @@ class NewsArticle(models.Model):
 
     def __str__(self):
         return self.title
+
+# PlayGround Model for Django API Use Case
+class simpleTestModelCars(models.Model):
+    company = models.CharField(max_length=255)
+    type = models.CharField(max_length=255)
