@@ -4,18 +4,12 @@ import { Container, Row, Col } from "react-bootstrap";
 export default function TemplatePage() {
   return (
     <>
-      <div className="App">
-        <h1>Hello World</h1>
-      </div>
       {/* Template for playground Components */}
       <div className="playgroundContentBox">
         <Container>
           <Row className="justify-content-center">
             <Col xs={12} md={12}>
-              <div className="content">
-                {/* Comments */}
-                <h2>Centered Content</h2>
-              </div>
+              <div className="content"></div>
             </Col>
           </Row>
         </Container>

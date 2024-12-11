@@ -13,7 +13,12 @@ docker-compose -f docker-compose-stage.yml up
 Start the PROD Containers
 docker-compose -f docker-compose-prod.yml up
 
------- FROM HERE ON JUST PLACEHOLDER CONTENT => NEED TO BE UPDATED ---------
+------ FROM HERE ON JUST PLACEHOLDER CONTENT => NEED TO BE UPDATED TODO ---------
+
+Used SDK's
+
+- Gallery: https://github.com/xiaolin/react-image-gallery / https://linxtion.com/demo/react-image-gallery/
+- Timeline: https://github.com/stephane-monnot/react-vertical-timeline
 
 ```bash
 pip install foobar

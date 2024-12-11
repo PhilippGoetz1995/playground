@@ -106,8 +106,8 @@ export default function Bootstrap() {
                     </Col>
                   </Row>
                 </Container>
-                <br />
-                <p>Center Content with justify</p>
+
+                <h4>Center Content with justify</h4>
                 <Container>
                   <Row className="justify-content-center">
                     <Col xs={1} className="bootstrapExampleColumn">
@@ -116,7 +116,7 @@ export default function Bootstrap() {
                   </Row>
                 </Container>
 
-                <p>Width based on Content</p>
+                <h4>Width based on Content</h4>
                 <Container>
                   <Row className="justify-content-center">
                     <Col className="bootstrapExampleColumn col-md-auto">

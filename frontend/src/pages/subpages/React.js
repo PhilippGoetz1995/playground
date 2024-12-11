@@ -5,6 +5,21 @@ import { useState } from "react";
 
 import ReactTestComponent from "../../components/playground_components/ReactTestComponent.js";
 
+// CSS for the Gallery
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from "react-image-gallery";
+
+const images = [
+  {
+    original: "../media/redbull_logo.png",
+    thumbnail: "../media/redbull_logo.png",
+  },
+  {
+    original: "../media/redbull_logo.png",
+    thumbnail: "../media/redbull_logo.png",
+  },
+];
+
 export default function React() {
   let uhrzeit = new Date().getHours();
   let newUhrzeit;
@@ -39,6 +54,13 @@ export default function React() {
   const handleClick = () => {
     // Toggle between blue and red
     setColor((prevColor) => (prevColor === "blue" ? "red" : "blue"));
+  };
+
+  // UseState Section
+  const [count, setCount] = useState(0); // State variable with initial value 0
+
+  const increment = () => {
+    setCount(count + 1); // Updates state and triggers a re-render
   };
 
   return (
@@ -93,6 +115,25 @@ export default function React() {
           </Col>
         </Row>
       </Container>
+
+      <h2>UseState & UseEffect Example</h2>
+      <p>
+        var = temporary within functions
+        <br />
+        const = immutable
+        <br />
+        UseState = State can be changed and is triggering a rerender (of that
+        specific component)
+      </p>
+
+      <div>
+        <p>Count: {count}</p>
+        <Button onClick={increment}>Increment</Button>
+      </div>
+
+      <h2>Simple Gallery</h2>
+
+      <ImageGallery items={images} />
     </div>
   );
 }

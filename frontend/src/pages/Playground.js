@@ -6,6 +6,8 @@ import Python from "./subpages/Python";
 import React from "./subpages/React";
 import Django from "./subpages/Django";
 import Bootstrap from "./subpages/Bootstrap";
+import VerticalTimelinePlayground from "./subpages/VerticalTimelinePlayground";
+import IntersectionObserverDemo from "./subpages/IntersectionObserverDemo";
 
 export default function Playground() {
   const [hash, setHash] = useState("");
@@ -46,6 +48,12 @@ export default function Playground() {
     case "Bootstrap":
       ComponentToRender = () => <Bootstrap />;
       break;
+    case "VerticalTimelinePlayground":
+      ComponentToRender = () => <VerticalTimelinePlayground />;
+      break;
+    case "IntersectionObserverDemo":
+      ComponentToRender = () => <IntersectionObserverDemo />;
+      break;
     default:
       ComponentToRender = () => <div>Error on Page</div>;
   }
@@ -73,6 +81,22 @@ export default function Playground() {
         <Nav.Item>
           <Nav.Link href="#Bootstrap" eventKey="Bootstrap">
             Bootstrap
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            href="#VerticalTimelinePlayground"
+            eventKey="VerticalTimelinePlayground"
+          >
+            VerticalTimeline
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            href="#IntersectionObserverDemo"
+            eventKey="IntersectionObserverDemo"
+          >
+            VerticalTimeline
           </Nav.Link>
         </Nav.Item>
       </Nav>
