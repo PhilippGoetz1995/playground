@@ -1,5 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 
+import { Bs0Circle } from "react-icons/bs";
+
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -39,6 +41,10 @@ export default function VerticalTimelinePlayground() {
               <div className="content" style={{ backgroundColor: "grey" }}>
                 <VerticalTimeline>
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     className="vertical-timeline-element--work"
                     contentStyle={{
                       background: "rgb(33, 150, 243)",
@@ -52,7 +58,7 @@ export default function VerticalTimelinePlayground() {
                       background: "rgb(33, 150, 243)",
                       color: "#fff",
                     }}
-                    icon=""
+                    icon={<Bs0Circle />}
                   >
                     <img
                       src="../media/redbull_logo.png"
@@ -79,6 +85,10 @@ export default function VerticalTimelinePlayground() {
                   </VerticalTimelineElement>
 
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     className="vertical-timeline-element--work"
                     date="2010 - 2011"
                     iconStyle={{
@@ -99,13 +109,17 @@ export default function VerticalTimelinePlayground() {
                     </p>
                   </VerticalTimelineElement>
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     className="vertical-timeline-element--work"
                     date="2008 - 2010"
                     iconStyle={{
                       background: "rgb(33, 150, 243)",
                       color: "#fff",
                     }}
-                    icon=""
+                    icon=" <img src='../media/2.png' style={{ width: '100%' }}></img>"
                   >
                     <h3 className="vertical-timeline-element-title">
                       Web Designer
@@ -116,6 +130,10 @@ export default function VerticalTimelinePlayground() {
                     <p>User Experience, Visual Design</p>
                   </VerticalTimelineElement>
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     className="vertical-timeline-element--work"
                     date="2006 - 2008"
                     iconStyle={{
@@ -133,6 +151,10 @@ export default function VerticalTimelinePlayground() {
                     <p>User Experience, Visual Design</p>
                   </VerticalTimelineElement>
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     className="vertical-timeline-element--education"
                     date="April 2013"
                     iconStyle={{
@@ -150,6 +172,10 @@ export default function VerticalTimelinePlayground() {
                     <p>Strategy, Social Media</p>
                   </VerticalTimelineElement>
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     className="vertical-timeline-element--education"
                     date="November 2012"
                     iconStyle={{
@@ -167,6 +193,10 @@ export default function VerticalTimelinePlayground() {
                     <p>Creative Direction, User Experience, Visual Design</p>
                   </VerticalTimelineElement>
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     className="vertical-timeline-element--education"
                     date="2002 - 2006"
                     iconStyle={{
@@ -194,6 +224,10 @@ export default function VerticalTimelinePlayground() {
                     <p>Creative Direction, Visual Design</p>
                   </VerticalTimelineElement>
                   <VerticalTimelineElement
+                    intersectionObserverProps={{
+                      rootMargin: "0px 0px -40px 0px",
+                      triggerOnce: false,
+                    }}
                     iconStyle={{
                       background: "rgb(16, 204, 82)",
                       color: "#fff",
