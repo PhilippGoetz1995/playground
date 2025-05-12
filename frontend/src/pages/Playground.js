@@ -61,7 +61,6 @@ export default function Playground() {
   return (
     <div>
       <h1>DEV Playground</h1>
-      {/* defaultActiveKey="#PythonBasics" */}
       <Nav variant="tabs" activeKey={activeKey}>
         <Nav.Item>
           <Nav.Link href="#Python" eventKey="Python">
