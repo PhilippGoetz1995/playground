@@ -1,14 +1,7 @@
-services: 
 
-  # The webserver is building the react app and serving it => therefore frontend is included
-
+services:
   webserver-prod:
-  # The webserver is building the react app and serving it
     image: ghcr.io/philippgoetz1995/playground-webserver:latest
-    build:
-      # With the context all paths need below will start from the directory where the compose file is in
-      context: .
-      dockerfile: ./webserver/Dockerfile-prod
     ports:
       - "80:80"
     networks:
@@ -18,21 +11,12 @@ services:
 
   backend-prod:
     image: ghcr.io/philippgoetz1995/playground-backend:latest
-    build:
-      # With the context all paths need below will start from the directory where the compose file is in
-      context: .
-      dockerfile: ./backend/Dockerfile-prod
     ports:
       - "8000:8000"
-    volumes:
-      # Mount local src folder with container src folder
-      - ./backend:/app
-    #TODO => Static File implementation for Images etc.
-    #volumes:
-    #  - static_volume:/app/static
     networks:
       - webnet
+    # environment:
+    #   - DJANGO_SETTINGS_MODULE=your_project.settings.production
 
-# With that network the following call is possible from nginx configuration http://frontend:3000;
 networks:
   webnet:
