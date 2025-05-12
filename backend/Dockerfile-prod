@@ -17,5 +17,5 @@ COPY backend/. .
 # Expose port 8000
 EXPOSE 8000
 
-# Start Application with Test Server (Build in Django)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Start gunicorn and bind the application to the correct port => "backend.wsgi" is the starting point for the application
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]

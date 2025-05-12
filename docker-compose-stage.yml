@@ -1,5 +1,5 @@
 services:
-  frontend:
+  frontend-stage:
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
@@ -15,7 +15,7 @@ services:
       # This is needed so that mounted volume for react application is working
       - WATCHPACK_POLLING=true
 
-  backend:
+  backend-stage:
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
@@ -31,16 +31,18 @@ services:
     networks:
       - webnet
 
-  webserver:
+  webserver-stage:
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
       dockerfile: ./webserver/Dockerfile-stage
     ports:
-      - "80:80"
+      - "8080:80"
+    volumes:
+      - ./webserver/nginx-stage.conf:/etc/nginx/nginx.conf
     depends_on:
-      - frontend
-      - backend
+      - frontend-stage
+      - backend-stage
     networks:
       - webnet
 

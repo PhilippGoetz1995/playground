@@ -25,27 +25,15 @@
 
 ## 🏗️ Architecture
 
-### Frontend (React)
+# Frontend => React
 - **Technology**: React.js
 - **Styling**: bootstrap
-
-### Backend (Django)
-- **Framework**: Django
-- **Database**: PostgreSQL
-- **Authentication**: Django REST Framework + JWT
-
-## ↗️ Server Architecture
-
-#### Staging Environment
-- **Application Server**: Gunicorn
-  - Handles Python WSGI applications
-  - Configuration:
-    - Bind: 0.0.0.0:8000
-
-#### Production Environment
-- **Web Server**: Nginx
-  - Serves static files
-  - Handles SSL/TLS termination
+# Backend => Django
+## STAGE -> using the build in django server
+## PROD -> using the gunicorn server
+# Webserver => nginx
+## STAGE -> is connnected with build in django server
+## PROD -> is connected to gunicorn server
 
 
 ### Technical Flow
@@ -62,7 +50,7 @@ Playground Application with:
 
 ## 🔧 How To Use
 
-1. Application is dockerized
+1. Application is dockerized => Start Docker (Desktop)
 2. There is a STAGE and PROD env
 
 Start the STAGE Containers
@@ -70,6 +58,13 @@ docker-compose -f docker-compose-stage.yml up
 
 Start the PROD Containers
 docker-compose -f docker-compose-prod.yml up
+
+
+## 🔧 Development
+
+- Editing python => use virtual env (venv)
+
+
 
 ## 🤬 Hints to not cry everytime
 
