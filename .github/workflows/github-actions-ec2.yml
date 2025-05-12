@@ -6,47 +6,47 @@ on:
     branches:
     - main
 
-# jobs:
-#   build-and-push:
-#     runs-on: ubuntu-latest
-
-#     permissions:
-#       packages: write
-#       contents: read
-
-    # steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v3
-
-    # - name: Set up Docker Buildx
-    #   uses: docker/setup-buildx-action@v3
-
-    # - name: Log in to GitHub Container Registry
-    #   uses: docker/login-action@v3
-    #   with:
-    #     registry: ghcr.io
-    #     username: ${{ github.actor }}
-    #     password: ${{ secrets.GITHUB_TOKEN }}
-
-    # - name: Build and Push with Docker Compose
-    #   run: |
-    #     docker compose -f docker-compose-prod.yml build
-    #     docker compose -f docker-compose-prod.yml push
-
 jobs:
-  deploy:
-    name: Deploy to EC2 on master branch push
+  build-and-push:
     runs-on: ubuntu-latest
 
+    permissions:
+      packages: write
+      contents: read
+
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    - name: Setup SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-    - name: Create Test Folder on EC2
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and Push with Docker Compose
       run: |
-        ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "mkdir -p /home/ec2-user/test-folder"
+        docker compose -f docker-compose-prod.yml build
+        docker compose -f docker-compose-prod.yml push
+
+
+      - name: Prepare SSH key
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem
+          chmod 600 ec2_key.pem
+
+      - name: Copy docker-compose file to EC2
+        run: |
+          scp -i ec2_key.pem -o StrictHostKeyChecking=no docker-compose-prod.yml ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ec2-user/playground/docker-compose-prod.yml
+
+      - name: SSH and deploy on EC2
+        run: |
+          ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            docker login ghcr.io -u ${{ secrets.GH_USERNAME }} -p ${{ secrets.GH_TOKEN }}
+            docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml pull
+            docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml up -d --remove-orphans
+          EOF
