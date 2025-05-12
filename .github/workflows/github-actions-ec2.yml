@@ -36,5 +36,4 @@ jobs:
 
             # Start the containers in background "-d"
             sudo docker-compose -f docker-compose-prod.yml up --build -d
-            
           '
