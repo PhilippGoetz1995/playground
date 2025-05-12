@@ -23,8 +23,9 @@
 <!-- Screenshot is optional -->
 <!-- ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif) -->
 
-## 🏗️ Architecture
+This is a Playground Application 
 
+## 🏗️ Architecture
 # Frontend => React
 - **Technology**: React.js
 - **Styling**: bootstrap
