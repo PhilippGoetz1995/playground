@@ -1,0 +1,40 @@
+name: Build & Deploy to EC2 with GHCR
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    name: Deploy to EC2 on master branch push
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Log in to GitHub Container Registry
+      run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u ${{ secrets.GH_USERNAME }} --password-stdin
+
+    - name: Build and Push Docker Image
+      run: |
+        IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/myapp:latest
+        docker build -t $IMAGE_NAME .
+        docker push $IMAGE_NAME
+
+    # - name: Setup SSH
+    #   run: |
+    #     mkdir -p ~/.ssh
+    #     echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
+    #     ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+    # - name: Deploy to EC2
+    #   run: |
+    #     ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+    #       docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_TOKEN }}
+    #       docker pull ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:latest
+    #       docker stop myapp || true && docker rm myapp || true
+    #       docker run -d --name myapp -p 80:3000 ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:latest
+    #     EOF
