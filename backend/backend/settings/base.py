@@ -10,13 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECRET KEY will be set in the environment variables in the docker file
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# SECRET KEY will be set in the environment variables in the docker-compose file
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 
 # Application definition
@@ -42,12 +37,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost",
-    "http://127.0.0.1:3000",
 ]
 
 ROOT_URLCONF = 'backend.urls'

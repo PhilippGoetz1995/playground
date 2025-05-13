@@ -14,8 +14,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY backend/. .
 
+# Make the startup script executable
+RUN chmod +x start-prod.sh
+
 # Expose port 8000
 EXPOSE 8000
 
-# Start gunicorn and bind the application to the correct port => "backend.wsgi" is the starting point for the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
+# Use the startup script as the entrypoint
+CMD ["./start-prod.sh"]

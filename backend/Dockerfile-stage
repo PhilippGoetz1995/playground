@@ -4,6 +4,11 @@ FROM python:3.11-alpine
 # Set the working directory
 WORKDIR /app
 
+# Prevents Python from writing pyc files to disk
+ENV PYTHONDONTWRITEBYTECODE=1
+#Prevents Python from buffering stdout and stderr
+ENV PYTHONUNBUFFERED=1 
+
 # Install specific pip version to not run into issues with the pip version
 RUN pip install --no-cache-dir pip==23.3.1
 
@@ -14,8 +19,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY backend/. .
 
+# Make the startup script executable
+RUN chmod +x start-stage.sh
+
 # Expose port 8000
 EXPOSE 8000
 
-# Start Application with Test Server (Build in Django)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Use the startup script as the entrypoint
+CMD ["./start-stage.sh"]

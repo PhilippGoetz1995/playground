@@ -15,8 +15,11 @@ services:
       - "8000:8000"
     networks:
       - webnet
-    # environment:
-    #   - DJANGO_SETTINGS_MODULE=your_project.settings.production
+    env_file:
+      - .env.prod
+    environment:
+      - NODE_ENV=production
+      - DJANGO_SETTINGS_MODULE=backend.settings.production
 
 networks:
   webnet:
