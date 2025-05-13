@@ -70,3 +70,7 @@ docker-compose -f docker-compose-prod.yml up
 ## 🤬 Hints to not cry everytime
 
 - ...
+
+
+TODO README
+- Extended the django backend structure with a "settings" folder with base, development and production settings
