@@ -34,4 +34,4 @@ COPY ../webserver/nginx-prod.conf /etc/nginx/nginx-prod.conf
 EXPOSE 80
 
 # Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-c", "/etc/nginx/nginx-prod.conf", "-g", "daemon off;"]
