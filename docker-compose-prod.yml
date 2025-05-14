@@ -1,4 +1,3 @@
-
 services:
   backend-prod:
     image: ghcr.io/philippgoetz1995/playground-backend:latest
@@ -17,7 +16,6 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./webserver/nginx-prod.conf:/etc/nginx/nginx.conf
       - static_volume:/app/staticfiles
     depends_on:
       - backend-prod

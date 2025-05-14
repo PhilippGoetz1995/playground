@@ -28,7 +28,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Copy custom nginx config (optional)
-COPY ../webserver/nginx-prod.conf /etc/nginx/nginx.conf
+COPY ../webserver/nginx-prod.conf /etc/nginx/nginx-prod.conf
 
 # Expose port 80
 EXPOSE 80
