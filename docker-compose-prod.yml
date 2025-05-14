@@ -17,14 +17,14 @@ services:
     image: ghcr.io/philippgoetz1995/playground-webserver:latest
     ports:
       - "80:80"
-    volumes:
-      - static_volume:/app/staticfiles
     depends_on:
       - backend-prod
     networks:
       - webnet
     environment:
       - NODE_ENV=production
+    volumes:
+      - static_volume:/app/staticfiles
 
 networks:
   webnet:
