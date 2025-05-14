@@ -8,7 +8,7 @@
 <h4 align="center">📦 P-Goetz Playgtound Application</h4>
 
 <p align="center">
-  <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/Version-1.0.0-blue"></a>
+  <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/Version-0.0.1-blue"></a>
   <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/Author-Philipp_Goetz-yellow"></a>
   <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/uptime-100%25-brightgreen"></a>
 
