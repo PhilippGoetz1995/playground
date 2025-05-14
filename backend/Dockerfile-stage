@@ -26,4 +26,4 @@ RUN chmod +x start-stage.sh
 EXPOSE 8000
 
 # Use the startup script as the entrypoint
-CMD ["./start-stage.sh"]
+CMD ["./start-stage.sh"] 

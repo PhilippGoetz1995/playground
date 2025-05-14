@@ -1,14 +1,5 @@
 
 services:
-  webserver-prod:
-    image: ghcr.io/philippgoetz1995/playground-webserver:latest
-    ports:
-      - "80:80"
-    networks:
-      - webnet
-    environment:
-      - NODE_ENV=production
-
   backend-prod:
     image: ghcr.io/philippgoetz1995/playground-backend:latest
     ports:
@@ -20,6 +11,23 @@ services:
     environment:
       - NODE_ENV=production
       - DJANGO_SETTINGS_MODULE=backend.settings.production
+  
+  webserver-prod:
+    image: ghcr.io/philippgoetz1995/playground-webserver:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./webserver/nginx-prod.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/staticfiles
+    depends_on:
+      - backend-prod
+    networks:
+      - webnet
+    environment:
+      - NODE_ENV=production
 
 networks:
   webnet:
+
+volumes:
+  static_volume:

@@ -15,7 +15,6 @@ services:
       # This is needed so that mounted volume for react application is working
       - WATCHPACK_POLLING=true
       - NODE_ENV=development
-      - DJANGO_SETTINGS_MODULE=your_project.settings.stage
 
   backend-stage:
     build:
@@ -24,20 +23,17 @@ services:
       dockerfile: ./backend/Dockerfile-stage
     ports:
       - "8000:8000"
+    volumes:
+      # Mount local src folder with container for development so that changes are reflected immediately
+      - ./backend:/app
+      - static_volume:/app/staticfiles
+    networks:
+      - webnet
     env_file:
       - .env.stage
     environment:
       - NODE_ENV=development
       - DJANGO_SETTINGS_MODULE=backend.settings.stage
-    volumes:
-      # Mount local src folder with container src folder for development
-      # so that changes are reflected immediately
-      - ./backend:/app
-    #TODO => Static File implementation for Images etc.
-    #volumes:
-    #  - static_volume:/app/static
-    networks:
-      - webnet
 
   webserver-stage:
     build:
@@ -48,6 +44,7 @@ services:
       - "8080:80"
     volumes:
       - ./webserver/nginx-stage.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/staticfiles
     depends_on:
       - frontend-stage
       - backend-stage
@@ -57,3 +54,6 @@ services:
 # With that network the following call is possible from nginx configuration http://frontend:3000;
 networks:
   webnet:
+
+volumes:
+  static_volume:

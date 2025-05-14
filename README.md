@@ -75,3 +75,11 @@ docker-compose -f docker-compose-prod.yml up
 TODO README
 - Extended the django backend structure with a "settings" folder with base, development and production settings
 
+
+Nginx Handles:
+/ → React frontend
+
+/admin/ → Django backend (via proxy)
+
+/staticfiles/ → Django static assets
+

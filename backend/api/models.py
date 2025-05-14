@@ -35,3 +35,8 @@ class NewsArticle(models.Model):
 class simpleTestModelCars(models.Model):
     company = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Simple Test Model Car"
+        verbose_name_plural = "Simple Test Model Cars"
+
