@@ -7,6 +7,9 @@ WORKDIR /app
 # Install specific pip version to not run into issues with the pip version
 RUN pip install --no-cache-dir pip==23.3.1
 
+# Install sqlite
+RUN apk add --no-cache sqlite
+
 # Install dependencies
 COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
