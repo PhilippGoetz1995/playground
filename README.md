@@ -83,3 +83,6 @@ Nginx Handles:
 
 /staticfiles/ → Django static assets
 
+
+- django checks for commands that are within installed apps (for example createsu.py file for creating superuser on the fly)
+
