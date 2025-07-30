@@ -1,5 +1,3 @@
-<!-- Credit to https://www.readme-templates.com/#key-features -->
-
 <h1 align="center">
   <br>
   <a href="https://p-goetz.de/"><img src="https://p-goetz.de/wp-content/uploads/2025/04/20250404_P-Goetz_DEV_logo.png" alt="P-Goetz" width="200"></a>
@@ -23,58 +21,90 @@
 <!-- Screenshot is optional -->
 <!-- ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif) -->
 
-This is a Playground Application 
+---
 
-## 🏗️ Architecture
-# Frontend => React
+This is a Playground Application
+
+---
+
+# 🏗️ Architecture
+
+## Frontend => React
+
 - **Technology**: React.js
 - **Styling**: bootstrap
-# Backend => Django
-## STAGE -> using the build in django server
-## PROD -> using the gunicorn server
-# Webserver => nginx
-## STAGE -> is connnected with build in django server
-## PROD -> is connected to gunicorn server
 
+## Backend => Django
 
-### Technical Flow
+- STAGE -> using the build in django server
+- PROD -> using the gunicorn server
+
+## Webserver => nginx
+
+- STAGE -> is connnected with build in django server
+- PROD -> is connected to gunicorn server
+
+## Technical Flow
+
 1. Frontend build process compiles React application
 2. Static files are served by Nginx
 
+<br>
 
-## 🚀 Key Features
+# 🚀 Features
+
+1. Python
+   1.1 Show Basic Code Examples
+
+2. React
+   2.1 Basics
+   2.2 News => Create News Articles + Show in News Overview
+   2.3 Vertical Timeline Example
+
+3. React & Django
+   3.1 News => Create News Articles + Show in News Overview
+
+4. Bootstrap
+   3.1 Basics
 
 Playground Application with:
-1. 
+
 - ✅ REACT Playground
+
+<br>
+
+# 🧪 Roadmap
+
 - 🔜 Coming Soon: for now nothing on the Roadmap
 
-## 🔧 How To Use
+<br>
+
+# 🔧 How To Use
 
 1. Application is dockerized => Start Docker (Desktop)
 2. There is a STAGE and PROD env
 
-Start the STAGE Containers
-docker-compose -f docker-compose-stage.yml up
+## Production
 
 Start the PROD Containers
 docker-compose -f docker-compose-prod.yml up
 
+## Development
 
-## 🔧 Development
+Start the STAGE Containers
+docker-compose -f docker-compose-stage.yml up
 
 - Editing python => use virtual env (venv)
 
+<br>
 
-
-## 🤬 Hints to not cry everytime
+# 🤬 Hints to not cry everytime
 
 - ...
 
-
 TODO README
-- Extended the django backend structure with a "settings" folder with base, development and production settings
 
+- Extended the django backend structure with a "settings" folder with base, development and production settings
 
 Nginx Handles:
 / → React frontend
@@ -83,6 +113,25 @@ Nginx Handles:
 
 /staticfiles/ → Django static assets
 
-
 - django checks for commands that are within installed apps (for example createsu.py file for creating superuser on the fly)
 
+- access django backend on stage only directly via port because the staticfiles are not collected and this would lead to problem with react development mode
+
+TODO Readme
+
+- GitHub Actions legt Docker Files in GitHub Store ab auf die dann wiederrum
+
+1. mit "Docker-compose-prod" werden die Container erstellt
+2. docker-compose-prod.yml => Ist dann für das Runterladen zuständig aus dem GHCR (GitHub Container Registry)
+
+Django Admin Oberfläche wird via Staticfiles über nginx direkt ausgegeben deswegen ist es nicht via Port :8000 erreichbar
+
+❌ Why It's Not Working
+React’s environment variables like the :baseUrl = process.env.REACT_APP_API_URL;
+MUST be defined at build time, not at runtime.
+Setting env_file: or environment: in Docker Compose does not pass values into a React build.
+So: your REACT_APP_API_URL must be present during npm run build or npm start, inside the Dockerfile.
+
+Helping Tipps:
+
+1. Check Docker notes => Quick Cheat Sheet

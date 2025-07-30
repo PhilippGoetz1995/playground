@@ -3,21 +3,23 @@ import Nav from "react-bootstrap/Nav";
 import { useEffect, useState } from "react";
 
 import Python from "./subpages/Python";
-import React from "./subpages/React";
+import REACT_Basics from "./subpages/REACT_Basics";
 import Django from "./subpages/Django";
 import Bootstrap from "./subpages/Bootstrap";
-import VerticalTimelinePlayground from "./subpages/VerticalTimelinePlayground";
-import IntersectionObserverDemo from "./subpages/IntersectionObserverDemo";
+import REACT_VerticalTimelinePlayground from "./subpages/REACT_VerticalTimelinePlayground";
 
 export default function Playground() {
   const [hash, setHash] = useState("");
-  const [activeKey, setActiveKey] = useState("");
+  const [mainActiveKey, setMainActiveKey] = useState("");
+  const [subActiveKey, setSubActiveKey] = useState("");
+
+  const [showReactSubmenu, setShowReactSubmenu] = useState(false);
 
   useEffect(() => {
     // Function to update the hash state => needed for the onsite Tab navigation
     const updateHash = () => {
       setHash(window.location.hash.substring(1)); // Remove the '#' symbol
-      setActiveKey(hash);
+      setMainActiveKey(hash);
     };
 
     // Update hash on component mount
@@ -25,6 +27,29 @@ export default function Playground() {
 
     // Listen for hash changes
     window.addEventListener("hashchange", updateHash);
+
+    const currentHash = window.location.hash.substring(1);
+
+    if (["React"].includes(currentHash)) {
+      setShowReactSubmenu(true);
+    } else {
+      setShowReactSubmenu(false);
+    }
+
+
+    if (["REACT_Basics", "REACT_VerticalTimelinePlayground"].includes(currentHash)) {
+      setMainActiveKey("REACT_Basics");
+      setSubActiveKey(currentHash);
+      setShowReactSubmenu(true);
+    } else if (["Python", "PythonIntro", "PythonAdvanced"].includes(currentHash)) {
+      setMainActiveKey("Python");
+      setSubActiveKey(currentHash);
+      setShowReactSubmenu(false);
+    } else {
+      setMainActiveKey(currentHash);
+      setSubActiveKey("");
+      setShowReactSubmenu(false);
+    }
 
     // Clean up event listener on component unmount
     return () => {
@@ -39,20 +64,17 @@ export default function Playground() {
     case "Python":
       ComponentToRender = () => <Python />;
       break;
-    case "React":
-      ComponentToRender = () => <React />;
+    case "REACT_Basics":
+      ComponentToRender = () => <REACT_Basics />;
+      break;
+    case "REACT_VerticalTimelinePlayground":
+      ComponentToRender = () => <REACT_VerticalTimelinePlayground />;
       break;
     case "Django":
       ComponentToRender = () => <Django />;
       break;
     case "Bootstrap":
       ComponentToRender = () => <Bootstrap />;
-      break;
-    case "VerticalTimelinePlayground":
-      ComponentToRender = () => <VerticalTimelinePlayground />;
-      break;
-    case "IntersectionObserverDemo":
-      ComponentToRender = () => <IntersectionObserverDemo />;
       break;
     default:
       ComponentToRender = () => <div>Error on Page</div>;
@@ -61,15 +83,19 @@ export default function Playground() {
   return (
     <div>
       <h1>DEV Playground</h1>
-      <Nav variant="tabs" activeKey={activeKey}>
+      <Nav variant="tabs" activeKey={mainActiveKey} >
         <Nav.Item>
-          <Nav.Link href="#Python" eventKey="Python">
+          <Nav.Link
+            eventKey="Python"
+            href="#Python"
+          >
             Python
           </Nav.Link>
         </Nav.Item>
+
         <Nav.Item>
-          <Nav.Link href="#React" eventKey="React">
-            React
+          <Nav.Link href="#REACT_Basics" eventKey="REACT_Basics" onClick={() => setShowReactSubmenu(!setShowReactSubmenu)}>
+            React ▾
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -82,23 +108,25 @@ export default function Playground() {
             Bootstrap
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            href="#VerticalTimelinePlayground"
-            eventKey="VerticalTimelinePlayground"
-          >
-            VerticalTimeline
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            href="#IntersectionObserverDemo"
-            eventKey="IntersectionObserverDemo"
-          >
-            VerticalTimeline
-          </Nav.Link>
-        </Nav.Item>
       </Nav>
+
+      {/* Submenu row (renders as part of the layout, below tabs) */}
+      {showReactSubmenu && (
+        <Nav className="py-2 px-3 border-bottom gap-3" variant="pills" activeKey={subActiveKey} style={{ background: "#f8f9fa" }}>
+          <Nav.Item>
+            <Nav.Link href="#REACT_Basics" eventKey="REACT_Basics">
+              Basics
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="#REACT_VerticalTimelinePlayground" eventKey="REACT_VerticalTimelinePlayground">
+            VerticalTimeline
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+      )}
+
+
       <ComponentToRender />
     </div>
   );

@@ -50,6 +50,8 @@ services:
       - backend-stage
     networks:
       - webnet
+    env_file:
+      - .env.stage
 
 # With that network the following call is possible from nginx configuration http://frontend:3000;
 networks:
