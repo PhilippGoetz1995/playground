@@ -4,6 +4,8 @@ services:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
       dockerfile: ./frontend/Dockerfile-stage
+      args:
+        REACT_APP_API_URL: http://localhost:8000/
     ports:
       - "3000:3000"
     volumes:
@@ -50,8 +52,6 @@ services:
       - backend-stage
     networks:
       - webnet
-    env_file:
-      - .env.stage
 
 # With that network the following call is possible from nginx configuration http://frontend:3000;
 networks:

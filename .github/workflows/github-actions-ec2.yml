@@ -1,52 +1,53 @@
-
 name: Build and Push to GHCR
 
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
+    env:
+      REACT_APP_API_URL: http://3.68.42.228:8000/
 
     permissions:
       packages: write
       contents: read
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Log in to GitHub Container Registry
-      uses: docker/login-action@v3
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build Docker images
-      run: |
-        docker compose -f docker-compose-prod.build.yml build
+      - name: Build Docker images
+        run: |
+          docker compose -f docker-compose-prod.build.yml build
 
-    - name: Push Docker images to GHCR
-      run: |
-        docker compose -f docker-compose-prod.build.yml push
+      - name: Push Docker images to GHCR
+        run: |
+          docker compose -f docker-compose-prod.build.yml push
 
+      - name: Prepare SSH key
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem
+          chmod 600 ec2_key.pem
 
-    - name: Prepare SSH key
-      run: |
-        echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem
-        chmod 600 ec2_key.pem
+      - name: Copy docker-compose file to EC2
+        run: |
+          scp -i ec2_key.pem -o StrictHostKeyChecking=no docker-compose-prod.yml ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ec2-user/playground/docker-compose-prod.yml
 
-    - name: Copy docker-compose file to EC2
-      run: |
-        scp -i ec2_key.pem -o StrictHostKeyChecking=no docker-compose-prod.yml ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ec2-user/playground/docker-compose-prod.yml
-
-    - name: SSH and deploy on EC2
-      run: |
-        ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          docker login ghcr.io -u ${{ secrets.GH_USERNAME }} -p ${{ secrets.GH_TOKEN }}
-          docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml pull
-          docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml up -d --remove-orphans
-        EOF
+      - name: SSH and deploy on EC2
+        run: |
+          ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            docker login ghcr.io -u ${{ secrets.GH_USERNAME }} -p ${{ secrets.GH_TOKEN }}
+            docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml pull
+            docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml up -d --remove-orphans
+          EOF

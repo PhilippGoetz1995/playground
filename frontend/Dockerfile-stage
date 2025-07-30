@@ -11,8 +11,9 @@ RUN npm install
 # Copy the rest of the application code
 COPY ./frontend ./
 
-# REACT_APP_API_URL must be present during npm run build or npm start, inside the Dockerfile.
-COPY ./.env.stage .env 
+# ⬇️ Accept build arg and set it as ENV
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 # Expose port 3000 => Default port for React Frontend application
 EXPOSE 3000
