@@ -1,5 +1,3 @@
-import { baseUrl } from "../shared";
-
 import { useEffect, useState } from "react";
 
 import NewsCard from "../components/NewsCard";
@@ -13,7 +11,7 @@ export default function NewsOverview() {
     description: "",
   });
 
-  const url = baseUrl + "api/newslist/";
+  const url = "api/newslist/";
 
   // //Initial Load of the Webpage
   useEffect(() => {

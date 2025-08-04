@@ -1,5 +1,3 @@
-import { baseUrl } from "../shared";
-
 import { Form, Button } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
@@ -32,7 +30,7 @@ export default function AddNewsArticle() {
     //Basic handlich should be deactivated
     e.preventDefault();
 
-    const url = baseUrl + "api/addnewsarticle/";
+    const url = "api/addnewsarticle/";
 
     let form_data = new FormData();
 

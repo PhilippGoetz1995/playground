@@ -1,4 +1,3 @@
-import { baseUrl } from "../../shared";
 import { Form, Button, Container, Row, Col, Table } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
@@ -20,7 +19,7 @@ export default function Django() {
   };
 
   const HandleDeleteFunction = async () => {
-    const url = baseUrl + "api/resetcarlist/";
+    const url =  "api/resetcarlist/";
 
     try {
       const response = await fetch(url, {
@@ -42,7 +41,7 @@ export default function Django() {
     //Basic handlich should be deactivated
     e.preventDefault();
 
-    const url = baseUrl + "api/addnewcar/";
+    const url = "api/addnewcar/";
 
     let form_data = new FormData();
 
@@ -80,7 +79,7 @@ export default function Django() {
 
   // //Initial Load of the Webpage
   useEffect(() => {
-    const url = baseUrl + "api/carlist/";
+    const url = "api/carlist/";
     fetch(url, {
       headers: {
         "Content-Type": "application/json",

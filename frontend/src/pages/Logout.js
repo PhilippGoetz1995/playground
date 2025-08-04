@@ -1,5 +1,4 @@
 import { useEffect, useContext } from "react";
-import { baseUrl } from "../shared";
 //import { useLocation, useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
 
@@ -12,7 +11,7 @@ export default function Logout() {
   const { logout } = useContext(LoginContext);
 
   useEffect(() => {
-    const url = baseUrl + "api/logout/";
+    const url = "api/logout/";
 
     //console.log(JSON.stringify(formData));
 

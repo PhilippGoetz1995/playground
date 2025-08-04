@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { baseUrl } from "../shared";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../App";
 
@@ -37,7 +36,7 @@ export default function Login() {
     //Basic handlich should be deactivated
     e.preventDefault();
 
-    const url = baseUrl + "api/login/";
+    const url = "api/login/";
 
     //console.log(JSON.stringify(formData));
 

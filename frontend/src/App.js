@@ -9,8 +9,6 @@ import Logout from "./pages/Logout";
 import TemplatePage from "./pages/TemplatePage";
 import Playground from "./pages/Playground";
 
-import { baseUrl } from "./shared";
-
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -20,7 +18,7 @@ export const LoginContext = createContext();
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const url = baseUrl + "api/userstatus/";
+  const url = "api/userstatus/";
 
   async function checkLoginStatus() {
     try {

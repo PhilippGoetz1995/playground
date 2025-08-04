@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Python from "./subpages/Python";
 import REACT_Basics from "./subpages/REACT_Basics";
-import Django from "./subpages/Django";
+import DJANGO_Basics from "./subpages/DJANGO_Basics";
 import Bootstrap from "./subpages/Bootstrap";
 import REACT_VerticalTimelinePlayground from "./subpages/REACT_VerticalTimelinePlayground";
 
@@ -71,7 +71,7 @@ export default function Playground() {
       ComponentToRender = () => <REACT_VerticalTimelinePlayground />;
       break;
     case "Django":
-      ComponentToRender = () => <Django />;
+      ComponentToRender = () => <DJANGO_Basics />;
       break;
     case "Bootstrap":
       ComponentToRender = () => <Bootstrap />;
@@ -125,7 +125,6 @@ export default function Playground() {
           </Nav.Item>
         </Nav>
       )}
-
 
       <ComponentToRender />
     </div>
