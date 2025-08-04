@@ -12,7 +12,7 @@ services:
       - DJANGO_SETTINGS_MODULE=backend.settings.production
     volumes:
       - static_volume:/app/staticfiles
-  
+
   webserver-prod:
     image: ghcr.io/philippgoetz1995/playground-webserver:latest
     ports:

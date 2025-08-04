@@ -86,7 +86,7 @@ Playground Application with:
 
 ## Production
 
-Start the PROD Containers
+Start the PROD Containers in Local DEV
 docker-compose -f docker-compose-prod.yml up
 
 ## Development
