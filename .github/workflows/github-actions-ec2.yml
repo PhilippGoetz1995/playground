@@ -32,21 +32,24 @@ jobs:
         run: |
           docker compose -f docker-compose-prod.build.yml push
 
-      - name: Prepare SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+      - name: Start ssh-agent and add key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          # If your key has a passphrase:
+          # ssh-passphrase: ${{ secrets.EC2_SSH_PASSPHRASE }}
+
+      - name: Trust EC2 host
+        run: ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Copy docker-compose file to EC2
         run: |
-          scp -o StrictHostKeyChecking=yes docker-compose-prod.yml \
+          scp docker-compose-prod.yml \
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ec2-user/playground/docker-compose-prod.yml
 
       - name: SSH and deploy on EC2
         run: |
-          ssh -o StrictHostKeyChecking=yes ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             docker login ghcr.io -u ${{ secrets.GH_USERNAME }} -p ${{ secrets.GH_TOKEN }}
             docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml pull
             docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml up -d --remove-orphans
