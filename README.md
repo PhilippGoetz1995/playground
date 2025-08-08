@@ -6,7 +6,7 @@
 <h4 align="center">📦 P-Goetz Playgtound Application</h4>
 
 <p align="center">
-  <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/Version-0.0.2-blue"></a>
+  <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/Version-0.0.3-blue"></a>
   <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/Author-Philipp_Goetz-yellow"></a>
   <a href="https://p-goetz.de/"><img src="https://img.shields.io/badge/uptime-100%25-brightgreen"></a>
 
@@ -79,20 +79,21 @@ Playground Application with:
 
 <br>
 
-# 🔧 How To Use
+# 🔧 DEVELOPMENT HOW TO
 
 1. Application is dockerized => Start Docker (Desktop)
 2. There is a STAGE and PROD env
 
-## Production
-
-Start the PROD Containers in Local DEV
-docker-compose -f docker-compose-prod.yml up
-
-## Development
+## STAGE
 
 Start the STAGE Containers
 docker-compose -f docker-compose-stage.yml up
+
+## PROD on Local Machine
+
+
+Start the PROD Containers in Local DEV (Containers must be build already on ghcr.io)
+docker-compose -f docker-compose-prod.yml up
 
 - Editing python => use virtual env (venv)
 
