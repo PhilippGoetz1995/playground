@@ -19,7 +19,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY backend/. .
 
-# Make the startup script executable
+# Make the startup script executable and format start-stage.sh formation from Windows to Linux format to remove the BOM
+RUN sed -i 's/\r$//' start-stage.sh
 RUN chmod +x start-stage.sh
 
 # Expose port 8000

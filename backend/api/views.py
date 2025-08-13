@@ -1,9 +1,9 @@
 from django.shortcuts import render
 
-
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 import json
@@ -41,7 +41,6 @@ def add_news_article_view(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
        
 # Playground add new car and get list of cars    
-    
 @api_view(['POST'])
 def add_new_car_view(request):
     if request.method == 'POST':

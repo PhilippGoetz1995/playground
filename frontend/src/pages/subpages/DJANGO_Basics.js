@@ -30,6 +30,9 @@ export default function Django() {
       }
       //Handle success
       console.log("Data sucessfully deleted");
+      
+      // Reload the table data
+      fetchCarList();
     } catch (error) {
       // Handle error
       console.error("Error submitting form:", error);
@@ -65,6 +68,15 @@ export default function Django() {
       }
       //Handle success
       console.log("Form data successfully submitted!");
+      
+      // Clear the form
+      setFormData({
+        company: "",
+        type: "",
+      });
+      
+      // Reload the table data
+      fetchCarList();
     } catch (error) {
       // Handle error
       console.error("Error submitting form:", error);
@@ -77,34 +89,35 @@ export default function Django() {
     variant: "",
   });
 
+  // Function to fetch car list data
+  const fetchCarList = async () => {
+    const url = "api/carlist/";
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
+      if (response.status === 404) {
+        //render a 404 component in this page
+      } else if (response.status === 401) {
+        // Handle unauthorized
+      }
+
+      const data = await response.json();
+      setCarList({ data });
+      console.log(data);
+    } catch (e) {
+      setError(e.message);
+      console.log(error);
+    }
+  };
+
   // //Initial Load of the Webpage
   useEffect(() => {
-    const url = "api/carlist/";
-    fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        //Check if there is an error with the fetch
-        if (response.status === 404) {
-          //render a 404 component in this page
-        } else if (response.status === 401) {
-        }
-
-        //If not return the JSON of the request
-        return response.json();
-      })
-      .then((data) => {
-        //Assign the data to "CarList" => it's an object
-        setCarList({ data });
-        console.log(data);
-      })
-      .catch((e) => {
-        setError(e.message);
-        console.log(error);
-      });
-  }, [error]); //Add error to the dependency array so if this is changing the request will be executed again
+    fetchCarList();
+  }, []); // Remove error from dependency array to avoid infinite loops
 
   return (
     <div className="playgroundContentBox">
@@ -121,30 +134,32 @@ export default function Django() {
 
               <p>Add a new Car:</p>
 
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="company">
-                  <Form.Label>Company</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="company"
-                    onChange={HandleTextChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="type">
-                  <Form.Label>Type</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="type"
-                    onChange={HandleTextChange}
-                  />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
+                             <Form onSubmit={handleSubmit}>
+                 <Form.Group className="mb-3" controlId="company">
+                   <Form.Label>Company</Form.Label>
+                   <Form.Control
+                     type="text"
+                     name="company"
+                     value={formData.company}
+                     onChange={HandleTextChange}
+                   />
+                 </Form.Group>
+                 <Form.Group className="mb-3" controlId="type">
+                   <Form.Label>Type</Form.Label>
+                   <Form.Control
+                     type="text"
+                     name="type"
+                     value={formData.type}
+                     onChange={HandleTextChange}
+                   />
+                 </Form.Group>
+                                 <Button variant="primary" type="submit">
+                   Submit
+                 </Button>
 
-                <Button onClick={HandleDeleteFunction} variant="danger">
-                  Reset Table
-                </Button>
+                 <Button onClick={HandleDeleteFunction} variant="danger" className="ms-3">
+                   Reset Table
+                 </Button>
               </Form>
 
               <p>Current List of Cars:</p>

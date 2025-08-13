@@ -92,7 +92,7 @@ docker-compose -f docker-compose-stage.yml up
 ## PROD on Local Machine
 
 
-Start the PROD Containers in Local DEV (Containers must be build already on ghcr.io)
+Start the PROD Containers in Local DEV (Containers must be build already on ghcr.io via GitHub Actions)
 docker-compose -f docker-compose-prod.yml up
 
 - Editing python => use virtual env (venv)

@@ -28,7 +28,7 @@ services:
     volumes:
       # Mount local src folder with container for development so that changes are reflected immediately
       - ./backend:/app
-      - static_volume:/app/staticfiles
+      # - static_volume:/app/staticfiles
     networks:
       - webnet
     env_file:
@@ -46,7 +46,7 @@ services:
       - "80:80"
     volumes:
       - ./webserver/nginx-stage.conf:/etc/nginx/nginx.conf
-      - static_volume:/app/staticfiles
+      # - static_volume:/app/staticfiles
     depends_on:
       - frontend-stage
       - backend-stage
