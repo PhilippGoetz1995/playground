@@ -59,7 +59,7 @@ jobs:
         if: always()
         uses: Ilshidur/action-slack@2.0.2
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
           args: |
             ${{ job.status == 'success' && ':white_check_mark: *CI passed*' || (job.status == 'cancelled' && ':warning: *CI cancelled*' || ':x: *CI failed*') }}
