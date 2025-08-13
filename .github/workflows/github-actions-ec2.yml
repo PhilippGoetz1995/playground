@@ -41,7 +41,6 @@ jobs:
             :x: *Build failed* for *${{ github.repository }}* on `${{ github.ref_name }}`
             Run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|#${{ github.run_number }}>
 
-
       - name: Push Docker images to GHCR
         run: |
           docker compose 
