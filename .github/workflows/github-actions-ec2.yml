@@ -53,3 +53,16 @@ jobs:
             docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml pull
             docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml up -d --remove-orphans
           EOF
+
+      # Final summary (always runs)
+      - name: Slack (Final status)
+        if: always()
+        uses: Ilshidur/action-slack@v3
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          args: |
+            ${{ job.status == 'success' && ':white_check_mark: *CI passed*' || (job.status == 'cancelled' && ':warning: *CI cancelled*' || ':x: *CI failed*') }}
+            Repo: *${{ github.repository }}* • Branch: `${{ github.ref_name }}`
+            Actor: ${{ github.actor }}
+            Run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|#${{ github.run_number }}>
