@@ -26,8 +26,22 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker images
+        id: build_images
         run: |
           docker compose -f docker-compose-prod.build.yml build
+
+        # Notify if build failed
+      - name: Slack (Build failed)
+        if: failure() && steps.build_images.outcome == 'failure'
+        uses: Ilshidur/action-slack@2.0.2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          args: |
+            :x: *Build failed* for *${{ github.repository }}* on `${{ github.ref_name }}`
+            Commit: <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha.substring(0,7) }}>
+            Run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|#${{ github.run_number }}>
+
 
       - name: Push Docker images to GHCR
         run: |
@@ -47,12 +61,25 @@ jobs:
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ec2-user/playground/docker-compose-prod.yml
 
       - name: SSH and deploy on EC2
+        id: scp_compose
         run: |
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             docker login ghcr.io -u ${{ secrets.GH_USERNAME }} -p ${{ secrets.GH_TOKEN }}
             docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml pull
             docker-compose -f /home/ec2-user/playground/docker-compose-prod.yml up -d --remove-orphans
           EOF
+      
+      # Notify if SCP failed
+      - name: Slack (Copy failed)
+        if: failure() && steps.scp_compose.outcome == 'failure'
+        uses: Ilshidur/action-slack@2.0.2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          args: |
+            :x: *Copy to EC2 failed* (scp)
+            Host: ${{ secrets.EC2_HOST }}
+            Run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|#${{ github.run_number }}>
 
       # Final summary (always runs)
       - name: Slack (Final status)
