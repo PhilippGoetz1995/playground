@@ -39,7 +39,6 @@ jobs:
         with:
           args: |
             :x: *Build failed* for *${{ github.repository }}* on `${{ github.ref_name }}`
-            Commit: <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha.substring(0,7) }}>
             Run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|#${{ github.run_number }}>
 
 
