@@ -4,7 +4,7 @@
 services:
   backend-prod:
     # Create image with name ghcr.io/philippgoetz1995/playground-backend:latest => the push to github container registry (ghcr) will happen later
-    image: ghcr.io/philippgoetz1995/playground-backend:${VERSION}
+    image: ghcr.io/philippgoetz1995/playground-backend:v1.0.${VERSION}
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
@@ -12,11 +12,12 @@ services:
       args:
         APP_VERSION: ${VERSION}
       tags:
-        - ghcr.io/philippgoetz1995/playground-backend:v${VERSION}
+        - ghcr.io/philippgoetz1995/playground-backend:latest
+        - ghcr.io/philippgoetz1995/playground-backend:v1.0.${VERSION}
 
   # The webserver is building the react app and serving it => therefore frontend is included
   webserver-prod:
-    image: ghcr.io/philippgoetz1995/playground-webserver:${VERSION}
+    image: ghcr.io/philippgoetz1995/playground-webserver:v1.0.${VERSION}
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
@@ -24,7 +25,8 @@ services:
       args:
         APP_VERSION: ${VERSION}
       tags:
-        - ghcr.io/philippgoetz1995/playground-webserver:v${VERSION}
+        - ghcr.io/philippgoetz1995/playground-webserver:latest
+        - ghcr.io/philippgoetz1995/playground-webserver:v1.0.${VERSION}
 
 # With that network the following call is possible from nginx configuration http://frontend:3000;
 networks:

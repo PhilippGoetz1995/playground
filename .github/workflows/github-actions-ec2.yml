@@ -62,7 +62,7 @@ jobs:
       - name: Build Docker images
         id: build_images
         env:
-          VERSION: ${{ steps.ver.outputs.VERSION }}
+          VERSION: ${{ steps.ver.outputs.version }}
         run: |
           docker compose -f docker-compose-prod.build.yml build
 
@@ -78,8 +78,10 @@ jobs:
             Run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|#${{ github.run_number }}>
 
       - name: Push Docker images to GHCR
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
         run: |
-          docker compose 
+          docker compose -f docker-compose-prod.build.yml push
       
       - name: Start ssh-agent and add key
         uses: webfactory/ssh-agent@v0.9.0
