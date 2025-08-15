@@ -1,6 +1,7 @@
 services:
   backend-prod:
     image: ghcr.io/philippgoetz1995/playground-backend:latest
+    pull_policy: always
     ports:
       - "8000:8000"
     networks:
@@ -15,6 +16,7 @@ services:
 
   webserver-prod:
     image: ghcr.io/philippgoetz1995/playground-webserver:latest
+    pull_policy: always
     ports:
       - "80:80"
     depends_on:

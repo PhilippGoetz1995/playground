@@ -38,9 +38,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Disable CSRF for API endpoints
-CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
-
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [

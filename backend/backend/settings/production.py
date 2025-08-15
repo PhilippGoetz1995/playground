@@ -14,3 +14,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
+# Disable CSRF for API endpoints
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://3.68.42.228']
