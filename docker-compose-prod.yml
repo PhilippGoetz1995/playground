@@ -1,6 +1,6 @@
 services:
   backend-prod:
-    image: ghcr.io/philippgoetz1995/playground-backend
+    image: ghcr.io/philippgoetz1995/playground-backend:v1.0.124
     pull_policy: always
     ports:
       - "8000:8000"
@@ -15,7 +15,7 @@ services:
       - static_volume:/app/staticfiles
 
   webserver-prod:
-    image: ghcr.io/philippgoetz1995/playground-webserver
+    image: ghcr.io/philippgoetz1995/playground-webserver:v1.0.124
     pull_policy: always
     ports:
       - "80:80"

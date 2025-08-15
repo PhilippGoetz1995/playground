@@ -39,7 +39,8 @@ jobs:
 
       - name: Write version.json
         run: |
-          cat > version.json <<EOF
+          mkdir -p frontend/public
+          cat > frontend/public/version.json <<EOF
           {
             "version": "${{ steps.ver.outputs.version }}",
             "commit": "${{ steps.ver.outputs.short_sha }}",
@@ -49,10 +50,10 @@ jobs:
 
       - name: Commit version.json back to repo
         run: |
-          if ! git diff --quiet -- version.json; then
+          if ! git diff --quiet -- frontend/public/version.json; then
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add version.json
+            git add frontend/public/version.json
             git commit -m "Update version.json to v${{ steps.ver.outputs.version }} [skip ci]"
             git push
           else
