@@ -10,7 +10,9 @@ export default function Header() {
       <Container>
         <Navbar.Brand shref="#home" className="text-white">
           {/* TODO Move Version Number in env File */}
-          PG Playground v0.1.21
+          {require('../../version.json').version
+            ? `PG Playground v0.1.${require('../../version.json').version}`
+            : 'PG Playground'}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

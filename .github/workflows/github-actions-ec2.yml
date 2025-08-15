@@ -22,9 +22,7 @@ jobs:
       - name: Compute version
         id: ver
         run: |
-          # Option A: monotonically increasing per workflow run on this repo
           VERSION="${{ github.run_number }}"
-          # (Optional) include short SHA and build date for debugging
           SHORT_SHA=$(git rev-parse --short HEAD)
           DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
@@ -63,6 +61,8 @@ jobs:
 
       - name: Build Docker images
         id: build_images
+        env:
+          VERSION: ${{ steps.ver.outputs.VERSION }}
         run: |
           docker compose -f docker-compose-prod.build.yml build
 
