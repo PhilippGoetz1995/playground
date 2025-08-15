@@ -4,7 +4,7 @@
 services:
   backend-prod:
     # Create image with name ghcr.io/philippgoetz1995/playground-backend:latest => the push to github container registry (ghcr) will happen later
-    image: ghcr.io/philippgoetz1995/playground-backend:latest
+    image: ghcr.io/philippgoetz1995/playground-backend:${VERSION}
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
@@ -16,7 +16,7 @@ services:
 
   # The webserver is building the react app and serving it => therefore frontend is included
   webserver-prod:
-    image: ghcr.io/philippgoetz1995/playground-webserver:latest
+    image: ghcr.io/philippgoetz1995/playground-webserver:${VERSION}
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
