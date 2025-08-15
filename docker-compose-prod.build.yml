@@ -1,4 +1,4 @@
-# This file is used to build the images for the production environment
+# This file is used to build the images for the production environment 
 # There is then a second file docker-compose-prod.yml which will run the containers as soon the container is on the server
 
 services:
@@ -31,3 +31,4 @@ services:
 # With that network the following call is possible from nginx configuration http://frontend:3000;
 networks:
   webnet:
+ 
