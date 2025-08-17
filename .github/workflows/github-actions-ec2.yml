@@ -55,7 +55,7 @@ jobs:
           echo "version.json content:"
           cat frontend/public/version.json
 
-      # --- bump package.json using npm version (explicit version)
+      # --- bump package.json using npm version (explicit version)1
       - name: Setup Node (for npm)
         uses: actions/setup-node@v4
         with:
