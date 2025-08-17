@@ -1,6 +1,16 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11-alpine
 
+# Accept dynamic values from CI
+ARG VERSION
+ARG BUILD_DATE
+
+# OCI labels (these show in Docker Desktop + docker inspect)
+LABEL org.opencontainers.image.title="playground-backend-prod" \
+      org.opencontainers.image.mainteiner="Philipp Goetz" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.created="${BUILD_DATE}"
+
 # Set the working directory
 WORKDIR /app
 

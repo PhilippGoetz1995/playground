@@ -39,6 +39,10 @@ jobs:
 
       - name: Write version.json
         run: |
+          echo "Creating version.json with version: ${{ steps.ver.outputs.version }}"
+          echo "Short SHA: ${{ steps.ver.outputs.short_sha }}"
+          echo "Build date: ${{ steps.ver.outputs.build_date }}"
+          
           mkdir -p frontend/public
           cat > frontend/public/version.json <<EOF
           {
@@ -47,6 +51,9 @@ jobs:
             "builtAt": "${{ steps.ver.outputs.build_date }}"
           }
           EOF
+          
+          echo "version.json content:"
+          cat frontend/public/version.json
 
       # --- bump package.json using npm version (explicit version)
       - name: Setup Node (for npm)
@@ -66,7 +73,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add package.json package-lock.json
           git commit -m "chore: set package version to $NEW_VERSION [skip ci]" || echo "No changes"
-          git push
+          git push origin HEAD:main
       # --- end bump ---
 
       - name: Build Docker images
