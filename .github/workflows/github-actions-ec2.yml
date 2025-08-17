@@ -43,7 +43,7 @@ jobs:
           cat > frontend/public/version.json <<EOF
           {
             "version": "${{ steps.ver.outputs.version }}",
-            "commit": "${{ steps.ver.outputs.short_sha }}",
+            "shortSha": "${{ steps.ver.outputs.short_sha }}",
             "builtAt": "${{ steps.ver.outputs.build_date }}"
           }
           EOF
@@ -57,7 +57,7 @@ jobs:
       - name: Bump package.json (explicit version)
         working-directory: frontend
         env:
-          NEW_VERSION: "1.0.${{ steps.ver.outputs.version }}"
+          NEW_VERSION: "${{ steps.ver.outputs.version }}"
         run: |
           npm ci
           npm version "$NEW_VERSION" --no-git-tag-version
