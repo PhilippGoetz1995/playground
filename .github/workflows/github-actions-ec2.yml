@@ -84,6 +84,7 @@ jobs:
       - name: Push Docker images to GHCR
         env:
           VERSION: ${{ steps.ver.outputs.version }}
+          BUILDDATE: ${{ steps.ver.outputs.build_date }}
         run: |
           docker compose -f docker-compose-prod.build.yml push
       
