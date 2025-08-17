@@ -30,6 +30,29 @@ jobs:
           echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
           echo "build_date=$DATE"     >> $GITHUB_OUTPUT
 
+      - name: Write frontend/public/version.json
+        run: |
+          mkdir -p frontend/public
+          cat > frontend/public/version.json <<EOF
+          {
+            "version": "${{ steps.ver.outputs.version }}",
+            "shortSha": "${{ steps.ver.outputs.short_sha }}",
+            "builtAt": "${{ steps.ver.outputs.build_date }}"
+          }
+          EOF
+
+      - name: Commit version.json back to repo
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Only commit if something actually changed
+          git add frontend/public/version.json
+          git commit -m "chore(ci): update version.json for ${{ steps.ver.outputs.version }}"
+          # Rebase in case new commits landed while we were building
+          git pull --rebase
+          git push
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
