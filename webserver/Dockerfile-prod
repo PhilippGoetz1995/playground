@@ -33,7 +33,7 @@ ARG BUILD_DATE
 LABEL org.opencontainers.image.title="react-app" \
       org.opencontainers.image.description="React app served by Nginx" \
       org.opencontainers.image.version="${VERSION}" \
-      org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.created="${BUILD_DATE}"
 
 
 # Copy the build files from the previous stage
