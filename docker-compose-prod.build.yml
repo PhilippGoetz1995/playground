@@ -12,7 +12,7 @@ services:
       args:
         APP_VERSION: ${VERSION}
       tags:
-        - ghcr.io/philippgoetz1995/playground-backend:latest
+        #- ghcr.io/philippgoetz1995/playground-backend:latest
         - ghcr.io/philippgoetz1995/playground-backend:v1.0.${VERSION}
 
   # The webserver is building the react app and serving it => therefore frontend is included
@@ -25,7 +25,7 @@ services:
       args:
         APP_VERSION: ${VERSION}
       tags:
-        - ghcr.io/philippgoetz1995/playground-webserver:latest
+        #- ghcr.io/philippgoetz1995/playground-webserver:latest
         - ghcr.io/philippgoetz1995/playground-webserver:v1.0.${VERSION}
 
 # With that network the following call is possible from nginx configuration http://frontend:3000;
