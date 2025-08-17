@@ -4,6 +4,10 @@
 # Use an official Node.js image as the base image
 FROM node:18-alpine AS build
 
+# Accept dynamic values from CI
+ARG VERSION
+ARG BUILDDATE
+
 # Set the working directory inside the container
 WORKDIR /app
 
@@ -15,6 +19,14 @@ RUN npm install
 
 # Copy the rest of the application code
 COPY ../frontend/. .
+
+# Create version.json file during build
+RUN echo '{' > public/version.json && \
+    echo '  "version": "'${VERSION}'",' >> public/version.json && \
+    echo '  "shortSha": "'${BUILDDATE}'",' >> public/version.json && \
+    echo '  "builtAt": "'${BUILDDATE}'"' >> public/version.json && \
+    echo '}' >> public/version.json && \
+    cat public/version.json
 
 # Build the React app for production
 RUN npm run build
@@ -28,13 +40,11 @@ FROM nginx:alpine
 ARG VERSION
 ARG BUILDDATE
 
-
 # OCI labels (these show in Docker Desktop + docker inspect)
 LABEL org.opencontainers.image.title="playground-webserver-prod" \
       org.opencontainers.image.mainteiner="Philipp Goetz" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.created="${BUILDDATE}"
-
 
 # Copy the build files from the previous stage
 COPY --from=build /app/build /usr/share/nginx/html

@@ -37,23 +37,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Write version.json
-        run: |
-          echo "Creating version.json with version: ${{ steps.ver.outputs.version }}"
-          echo "Short SHA: ${{ steps.ver.outputs.short_sha }}"
-          echo "Build date: ${{ steps.ver.outputs.build_date }}"
-          
-          mkdir -p frontend/public
-          cat > frontend/public/version.json <<EOF
-          {
-            "version": "${{ steps.ver.outputs.version }}",
-            "shortSha": "${{ steps.ver.outputs.short_sha }}",
-            "builtAt": "${{ steps.ver.outputs.build_date }}"
-          }
-          EOF
-          
-          echo "version.json content:"
-          cat frontend/public/version.json
+
 
       # --- bump package.json using npm version (explicit version)1
       - name: Setup Node (for npm)
@@ -82,6 +66,8 @@ jobs:
           VERSION: ${{ steps.ver.outputs.version }}
           BUILDDATE: ${{ steps.ver.outputs.build_date }}   # ISO-8601
         run: |
+          echo "Building with VERSION: $VERSION"
+          echo "Building with BUILDDATE: $BUILDDATE"
           docker compose -f docker-compose-prod.build.yml build
 
         # Notify if build failed
