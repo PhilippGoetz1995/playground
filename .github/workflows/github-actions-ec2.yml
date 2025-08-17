@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-
+      # Store version to id "ver" so that it can be used later with steps.ver.outputs.*
       - name: Compute version
         id: ver
         run: |
@@ -36,17 +36,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Write version.json
-        run: |
-          mkdir -p frontend/public
-          cat > frontend/public/version.json <<EOF
-          {
-            "version": "${{ steps.ver.outputs.version }}",
-            "commit": "${{ steps.ver.outputs.short_sha }}",
-            "builtAt": "${{ steps.ver.outputs.build_date }}"
-          }
-          EOF
 
       # --- bump package.json using npm version (explicit version) ---
       - name: Setup Node (for npm)
@@ -68,18 +57,6 @@ jobs:
           git commit -m "chore: set package version to $NEW_VERSION [skip ci]" || echo "No changes"
           git push
       # --- end bump ---
-
-      - name: Commit version.json back to repo
-        run: |
-          if ! git diff --quiet -- frontend/public/version.json; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add frontend/public/version.json
-            git commit -m "Update version.json to v${{ steps.ver.outputs.version }} [skip ci]"
-            git push
-          else
-            echo "version.json unchanged; skipping commit."
-          fi
 
       - name: Build Docker images
         id: build_images
