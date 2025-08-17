@@ -22,7 +22,7 @@ jobs:
       - name: Compute version
         id: ver
         run: |
-          VERSION="${{ github.run_number }}"
+          VERSION="1.0.${{ github.run_number }}"
           SHORT_SHA=$(git rev-parse --short HEAD)
           DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
@@ -73,6 +73,7 @@ jobs:
         id: build_images
         env:
           VERSION: ${{ steps.ver.outputs.version }}
+          BUILD_DATE: ${{ steps.ver.outputs.build_date }}   # ISO-8601
         run: |
           docker compose -f docker-compose-prod.build.yml build
 

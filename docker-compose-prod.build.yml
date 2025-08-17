@@ -10,23 +10,25 @@ services:
       context: .
       dockerfile: ./backend/Dockerfile-prod
       args:
-        APP_VERSION: ${VERSION}
+        VERSION: ${VERSION}
+        BUILD_DATE: ${BUILD_DATE}
       tags:
-        #- ghcr.io/philippgoetz1995/playground-backend:latest
-        - ghcr.io/philippgoetz1995/playground-backend:v1.0.${VERSION}
+        - ghcr.io/philippgoetz1995/playground-backend:latest
+        - ghcr.io/philippgoetz1995/playground-backend:v${VERSION}
 
   # The webserver is building the react app and serving it => therefore frontend is included
   webserver-prod:
-    image: ghcr.io/philippgoetz1995/playground-webserver:v1.0.${VERSION}
+    image: ghcr.io/philippgoetz1995/playground-webserver:v${VERSION}
     build:
       # With the context all paths need below will start from the directory where the compose file is in
       context: .
       dockerfile: ./webserver/Dockerfile-prod
       args:
-        APP_VERSION: ${VERSION}
+        VERSION: ${VERSION}
+        BUILD_DATE: ${BUILD_DATE}
       tags:
-        #- ghcr.io/philippgoetz1995/playground-webserver:latest
-        - ghcr.io/philippgoetz1995/playground-webserver:v1.0.${VERSION}
+        - ghcr.io/philippgoetz1995/playground-webserver:latest
+        - ghcr.io/philippgoetz1995/playground-webserver:v${VERSION}
 
 # With that network the following call is possible from nginx configuration http://frontend:3000;
 networks:
