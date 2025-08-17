@@ -1,5 +1,5 @@
 # Use an official Node.js image to build the React app
-FROM node:14 AS build
+FROM node:bookworm-slima AS build
 
 # Set the working directory
 WORKDIR /app
