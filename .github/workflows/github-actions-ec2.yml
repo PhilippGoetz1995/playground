@@ -48,7 +48,7 @@ jobs:
           }
           EOF
 
-      # --- bump package.json using npm version (explicit version) ---
+      # --- bump package.json using npm version (explicit version)
       - name: Setup Node (for npm)
         uses: actions/setup-node@v4
         with:
