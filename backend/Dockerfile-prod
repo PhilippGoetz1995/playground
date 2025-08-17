@@ -3,13 +3,13 @@ FROM python:3.11-alpine
 
 # Accept dynamic values from CI
 ARG VERSION
-ARG BUILD_DATE
+ARG BUILDDATE
 
 # OCI labels (these show in Docker Desktop + docker inspect)
 LABEL org.opencontainers.image.title="playground-backend-prod" \
       org.opencontainers.image.mainteiner="Philipp Goetz" \
       org.opencontainers.image.version="${VERSION}" \
-      org.opencontainers.image.created="${BUILD_DATE}"
+      org.opencontainers.image.created="${BUILDDATE}"
 
 # Set the working directory
 WORKDIR /app

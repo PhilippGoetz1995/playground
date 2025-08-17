@@ -80,7 +80,7 @@ jobs:
         id: build_images
         env:
           VERSION: ${{ steps.ver.outputs.version }}
-          BUILD_DATE: ${{ steps.ver.outputs.build_date }}   # ISO-8601
+          BUILDDATE: ${{ steps.ver.outputs.build_date }}   # ISO-8601
         run: |
           docker compose -f docker-compose-prod.build.yml build
 
